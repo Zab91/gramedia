@@ -1,9 +1,13 @@
+// Set Up
+import { Route, Routes, BrowserRouter } from "react-router-dom";
+
+// Components
+import { Layout } from "./components/layout";
+
+// Pages
 import { RegisterPage } from "./pages/RegisterPage";
 import { VerificationPage } from "./pages/VerificationPage";
-import { Homepage } from "./pages/landingPage";
-// import { useDispatch } from "react-redux";
-import axios from "axios";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { HomePage } from "./pages/HomePage";
 
 function App() {
   // const dispatch = useDispatch();
@@ -11,13 +15,15 @@ function App() {
   console.log(token);
 
   return (
-    <div>
+    <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Homepage />} />
+        <Route path="/" element={<Layout />}>
+          <Route index element={<HomePage />} />
+        </Route>
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/verification/:token" element={<VerificationPage />} />
       </Routes>
-    </div>
+    </BrowserRouter>
   );
 }
 

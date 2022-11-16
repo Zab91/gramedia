@@ -1,17 +1,14 @@
-import { useState } from "react";
 import axios from "axios";
 import { Formik, ErrorMessage, Field, Form } from "formik";
 import * as Yup from "yup";
 import Swal from "sweetalert2";
 import Button from "react-bootstrap/Button";
 import FormTB from "react-bootstrap/Form";
-import "./register.css";
+import "../css/register.css";
 
 const urlRegister = "http://localhost:2000/user/register";
 
 export const RegisterPage = () => {
-  const [show, setShow] = useState(false);
-
   const registerSchema = Yup.object().shape({
     password: Yup.string().required().min(6, "Minimal password 6 karakter"),
     email: Yup.string()
