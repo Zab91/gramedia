@@ -11,10 +11,9 @@ server.use(express.json());
 server.use(cors());
 server.use(bearerToken());
 
-const { user } = require("./router");
+const { user, book } = require("./router");
 server.use("/user", user);
-
-console.log("FILTER")
+server.use("/book", book);
 
 server.listen(PORT, () => {
   // db.sequelize.sync({ alter: true });
