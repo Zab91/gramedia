@@ -1,23 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import { RegisterPage } from "./pages/RegisterPage";
+import { VerificationPage } from "./pages/VerificationPage";
+import { Homepage } from "./pages/landingPage";
+// import { useDispatch } from "react-redux";
+import axios from "axios";
+import { Routes, Route, Navigate } from "react-router-dom";
 
 function App() {
+  // const dispatch = useDispatch();
+  const token = localStorage.getItem("token");
+  console.log(token);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Routes>
+        <Route path="/" element={<Homepage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/verification/:token" element={<VerificationPage />} />
+      </Routes>
     </div>
   );
 }
