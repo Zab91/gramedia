@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import Swal from "sweetalert2";
+
 const url = "http://localhost:2000/user/verification";
 
 export const VerificationPage = () => {
@@ -14,10 +16,18 @@ export const VerificationPage = () => {
           Authorization: `Bearer ${params.token}`,
         },
       });
-      setMsg(res.data);
+      Swal.fire({
+        icon: "success",
+        tittle: "Verifikasi",
+        text: setMsg(res.data),
+      });
     } catch (err) {
       console.log(err);
-      setMsg("Verifikasi Gagal");
+      Swal.fire({
+        icon: "error",
+        title: "Verifikasi",
+        text: setMsg("Verifikasi Gagal"),
+      });
     }
   };
 
@@ -28,7 +38,10 @@ export const VerificationPage = () => {
   return (
     <div>
       <h1>Verifikasi Akun Anda</h1>
-      <h3>{msg}</h3>
+      <br></br>
+      <p>{msg}</p>
+      <br></br>
+      <strong>Nim anda adalah {}</strong>
     </div>
   );
 };

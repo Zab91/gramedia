@@ -3,6 +3,7 @@ const { user } = require("../controller");
 
 router.post("/register", user.register);
 router.get("/verification", user.verification);
-router.get("/login", user.login);
+router.post("/login", user.login);
+router.get("/keeplogin", user.keepLogin);
 
 module.exports = router;

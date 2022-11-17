@@ -58,21 +58,54 @@ module.exports = {
         raw: true,
       });
       console.log(isUserExist);
-
+      console.log(password);
       if (!isUserExist) throw "User tidak ada";
 
       await bcrypt.compare(password, isUserExist.password);
+      const token = jwt.sign(
+        {
+          username: isUserExist.username,
+          NIM: isUserExist.NIM,
+        },
+        "gramedia"
+      );
 
-      res.status(200).send("selamat anda login");
+      res.status(200).send({
+        user: {
+          username: isUserExist.username,
+          NIM: isUserExist.NIM,
+        },
+        token,
+      });
     } catch (error) {
       console.log(error);
       res.status(400).send(error);
+    }
+  },
+  keepLogin: async (req, res) => {
+    try {
+      const verify = jwt.verify(req.token, "gramedia");
+      console.log(verify);
+      const result = await user.findAll({
+        where: {
+          NIM: verify.NIM,
+        },
+      });
+
+      res.status(200).send({
+        NIM: result[0].NIM,
+        username: result[0].username,
+      });
+    } catch (err) {
+      console.log(err);
+      res.status(400).send(err);
     }
   },
   verification: async (req, res) => {
     try {
       const verify = jwt.verify(req.token, "gramedia");
       console.log(verify);
+      console.log(verify.NIM);
 
       await user.update(
         {
