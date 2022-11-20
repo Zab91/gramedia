@@ -9,7 +9,7 @@ import { RegisterPage } from "./pages/RegisterPage";
 import { VerificationPage } from "./pages/VerificationPage";
 import { HomePage } from "./pages/HomePage";
 import { LoginPage } from "./pages/LoginPage";
-import { AdminPage } from "./pages/AdminPage"
+import { AdminPage } from "./pages/AdminPage";
 
 //keepLogin
 import { useDispatch } from "react-redux";
