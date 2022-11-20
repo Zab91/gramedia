@@ -29,7 +29,7 @@ module.exports = {
 
       const result = await book.findAll({
         order: [[sort ? sort : "id", direction ? direction : "ASC"]],
-        limit: 8,
+        limit: 10,
         offset: pagination ? +pagination : 0,
         raw: true,
       });
@@ -74,7 +74,8 @@ module.exports = {
           category: genre,
         },
         order: [[sort ? sort : "id", direction ? direction : "ASC"]],
-        limit: 8,
+        GRAM-7-SORT
+        limit: 10,
         offset: pagination ? +pagination : 0,
         raw: true,
       });

@@ -7,7 +7,7 @@ import FormTB from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { login } from "../redux/userSlice";
 import "../css/login.css";
-// import { Card } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 
 const url = "http://localhost:2000/user/login";
 

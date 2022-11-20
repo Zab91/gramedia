@@ -3,15 +3,15 @@ import { useState } from "react";
 import Axios from "axios";
 
 // Bootstrap
-import Card from "react-bootstrap/Card";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Button from "react-bootstrap/Button";
+import Table from "react-bootstrap/Table";
 
 // CSS
 import "../css/style.css";
 
-export const HomePage = () => {
+export const AdminPage = () => {
   const [books, setBooks] = useState([]);
   const [category, setCategory] = useState();
   const [sort, setSort] = useState();
@@ -142,19 +142,32 @@ export const HomePage = () => {
       </DropdownButton>
 
       <div className="containerHome">
-        {books.map((item, index) => {
-          return (
-            <Card className="cardCont" key={index}>
-              <Card.Img
-                variant="top"
-                src="https://cdn.gramedia.com/uploads/items/9786020333519_RICH-DADS---.jpg"
-              />
-              <Card.Body>
-                <Card.Title>{item.title}</Card.Title>
-              </Card.Body>
-            </Card>
-          );
-        })}
+        <Table striped bordered hover variant="dark">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Title</th>
+              <th>Author</th>
+              <th>Publisher</th>
+              <th>Category</th>
+              <th>Year</th>
+            </tr>
+          </thead>
+          {books.map((item, index) => {
+            return (
+              <tbody>
+                <tr>
+                  <td>{item.id}</td>
+                  <td>{item.title}</td>
+                  <td>{item.author}</td>
+                  <td>{item.publisher}</td>
+                  <td>{item.category}</td>
+                  <td>{item.year}</td>
+                </tr>
+              </tbody>
+            );
+          })}
+        </Table>
       </div>
 
       <div className="containerButton">
