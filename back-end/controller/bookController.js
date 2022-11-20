@@ -74,7 +74,6 @@ module.exports = {
           category: genre,
         },
         order: [[sort ? sort : "id", direction ? direction : "ASC"]],
-        GRAM-7-SORT
         limit: 10,
         offset: pagination ? +pagination : 0,
         raw: true,
