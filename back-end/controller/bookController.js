@@ -84,4 +84,21 @@ module.exports = {
       res.status(400).send(err);
     }
   },
+  detail: async (req, res) => {
+    try {
+      // console.log(req.params.id)
+      const result = await book.findOne({
+        where: {
+          id: req.params.id,
+        },
+        raw: true,
+      });
+
+      // console.log(result);
+
+      res.status(200).send(result);
+    } catch (err) {
+      res.status(400).send(err);
+    }
+  },
 };

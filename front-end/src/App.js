@@ -10,8 +10,9 @@ import { VerificationPage } from "./pages/VerificationPage";
 import { HomePage } from "./pages/HomePage";
 import { LoginPage } from "./pages/LoginPage";
 import { AdminPage } from "./pages/AdminPage";
+import { DetailPage } from "./pages/DetailPage";
 
-//keepLogin
+// KeepLogin
 import { useDispatch } from "react-redux";
 import { login } from "./redux/userSlice";
 import { useEffect } from "react";
@@ -38,7 +39,7 @@ function App() {
 
   useEffect(() => {
     keepLogin();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -46,11 +47,12 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />} />
-          <Route path="/admin" element={<AdminPage />} />
+          <Route path="/book/:id" element={<DetailPage />} />
         </Route>
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/verification/:token" element={<VerificationPage />} />
+        <Route path="/admin" element={<AdminPage />} />
       </Routes>
     </BrowserRouter>
   );
