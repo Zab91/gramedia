@@ -44,7 +44,7 @@ export const HomePage = () => {
       const paginationURL = directionURL + `pagination=${pagination}`;
 
       const res = await Axios.get(paginationURL);
-      console.log(num);
+      // console.log(num);
       setBooks(res.data);
     } catch (err) {
       console.log(err);
@@ -144,30 +144,43 @@ export const HomePage = () => {
       <div className="containerHome">
         {books.map((item, index) => {
           return (
-            <Card className="cardCont" key={index}>
-              <Card.Img
-                variant="top"
-                src="https://cdn.gramedia.com/uploads/items/9786020333519_RICH-DADS---.jpg"
-              />
-              <Card.Body>
-                <Card.Title>{item.title}</Card.Title>
-              </Card.Body>
-            </Card>
+            <a href={`/book/${item.id}`} key={index}>
+              <Card className="cardCont">
+                <Card.Img
+                  variant="top"
+                  src="https://cdn.gramedia.com/uploads/items/9786020333519_RICH-DADS---.jpg"
+                />
+                <Card.Body>
+                  <Card.Title>{item.title}</Card.Title>
+                </Card.Body>
+              </Card>
+            </a>
           );
         })}
       </div>
 
       <div className="containerButton">
         {books.length === 10 ? (
-          <Button
-            variant="primary"
-            onClick={() => {
-              setPagination(pagination + 8);
-              setPage(page + 1);
-            }}
-          >
-            Next
-          </Button>
+          <div>
+            <Button
+              variant="primary"
+              onClick={() => {
+                setPagination(pagination + 8);
+                setPage(page + 1);
+              }}
+            >
+              Next
+            </Button>
+            {/* <Button
+              variant="primary"
+              onClick={() => {
+                setPagination(pagination + 8);
+                setPage(page + 1);
+              }}
+            >
+              Last
+            </Button> */}
+          </div>
         ) : (
           <Button variant="primary" disabled>
             Next
@@ -177,19 +190,35 @@ export const HomePage = () => {
         <h3>Page {page}</h3>
 
         {page !== 1 ? (
-          <Button
-            variant="primary"
-            onClick={() => {
-              setPagination(pagination - 8);
-              setPage(page - 1);
-            }}
-          >
-            Previous
-          </Button>
+          <div>
+            <Button
+              variant="primary"
+              onClick={() => {
+                setPagination(pagination - 8);
+                setPage(page - 1);
+              }}
+            >
+              Previous
+            </Button>
+            <Button
+              variant="primary"
+              onClick={() => {
+                setPagination(0);
+                setPage(1);
+              }}
+            >
+              First
+            </Button>
+          </div>
         ) : (
-          <Button variant="primary" disabled>
-            Previous
-          </Button>
+          <div>
+            <Button variant="primary" disabled>
+              Previous
+            </Button>
+            <Button variant="primary" disabled>
+              first
+            </Button>
+          </div>
         )}
       </div>
     </div>
