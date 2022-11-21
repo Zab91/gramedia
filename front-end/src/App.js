@@ -50,6 +50,7 @@ function App() {
         <Route path="/admin" element={<AdminLoginPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/verification/:token" element={<VerificationPage />} />
+        <Route path="/adminLogin" element={<AdminLoginPage />} />
       </Routes>
     </BrowserRouter>
   );

@@ -32,8 +32,7 @@ export const RegisterPage = () => {
         icon: "error",
         title: "Error",
         text: error.response.data.name
-          ? // ? error.response.data.errors[0].message
-            "Email sudah dipakai"
+          ? error.response.data.errors[0].message
           : error.response.data,
       });
     }
