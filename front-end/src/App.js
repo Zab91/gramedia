@@ -9,6 +9,7 @@ import { RegisterPage } from "./pages/RegisterPage";
 import { VerificationPage } from "./pages/VerificationPage";
 import { HomePage } from "./pages/HomePage";
 import { LoginPage } from "./pages/LoginPage";
+import { AdminLoginPage } from "./pages/AdminLoginPage";
 
 //keepLogin
 import { useDispatch, useSelector } from "react-redux";
@@ -21,23 +22,23 @@ function App() {
   const token = localStorage.getItem("token");
   console.log(token);
 
-  const keepLogin = async () => {
-    try {
-      const res = await axios.get(`http://localhost:2000/user/keepLogin`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      console.log(res.data);
-      dispatch(login(res.data));
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  // const keepLogin = async () => {
+  //   try {
+  //     const res = await axios.get(`http://localhost:2000/user/keepLogin`, {
+  //       headers: {
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //     });
+  //     console.log(res.data);
+  //     dispatch(login(res.data));
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
 
-  useEffect(() => {
-    keepLogin();
-  }, []);
+  // useEffect(() => {
+  //   keepLogin();
+  // });
 
   return (
     <BrowserRouter>
@@ -46,6 +47,7 @@ function App() {
           <Route index element={<HomePage />} />
         </Route>
         <Route path="/register" element={<RegisterPage />} />
+        <Route path="/admin" element={<AdminLoginPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/verification/:token" element={<VerificationPage />} />
       </Routes>
