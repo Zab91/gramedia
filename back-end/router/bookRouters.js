@@ -11,4 +11,7 @@ router.post("/add", book.add);
 router.get("/filter", book.filter);
 router.get("/search", book.search);
 
+// router.get("/detail", book.detail);
+router.get("/detail/:id", book.detail);
+
 module.exports = router;

@@ -22,11 +22,28 @@ module.exports = {
       res.status(400).send(err);
     }
   },
+  all: async (req, res) => {
+    try {
+      const { sort, direction, pagination } = req.query;
+      // console.log(sort);
+
+      const result = await book.findAll({
+        order: [[sort ? sort : "id", direction ? direction : "ASC"]],
+        limit: 10,
+        offset: pagination ? +pagination : 0,
+        raw: true,
+      });
+
+      // console.log(result);
+      res.status(200).send(result);
+    } catch (err) {
+      res.status(400).send(err);
+    }
+  },
   search: async (req, res) => {
     try {
       const { data } = req.query;
-
-      console.log(data);
+      // console.log(data);
 
       const result = await book.findAll({
         where: {
@@ -50,12 +67,15 @@ module.exports = {
   },
   filter: async (req, res) => {
     try {
-      const { data } = req.query;
+      const { genre, sort, direction, pagination } = req.query;
 
       const result = await book.findAll({
         where: {
-          category: data,
+          category: genre,
         },
+        order: [[sort ? sort : "id", direction ? direction : "ASC"]],
+        limit: 10,
+        offset: pagination ? +pagination : 0,
         raw: true,
       });
 
@@ -64,23 +84,18 @@ module.exports = {
       res.status(400).send(err);
     }
   },
-  filterRomance: async (req, res) => {
+  detail: async (req, res) => {
     try {
-      const result = await book.findAll({
+      // console.log(req.params.id)
+      const result = await book.findOne({
         where: {
-          category: "Romance",
+          id: req.params.id,
         },
         raw: true,
       });
 
-      res.status(200).send(result);
-    } catch (err) {
-      res.status(400).send(err);
-    }
-  },
-  all: async (req, res) => {
-    try {
-      const result = await book.findAll();
+      // console.log(result);
+
       res.status(200).send(result);
     } catch (err) {
       res.status(400).send(err);

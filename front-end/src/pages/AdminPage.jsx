@@ -3,15 +3,15 @@ import { useState } from "react";
 import Axios from "axios";
 
 // Bootstrap
-import Card from "react-bootstrap/Card";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Button from "react-bootstrap/Button";
+import Table from "react-bootstrap/Table";
 
 // CSS
 import "../css/style.css";
 
-export const HomePage = () => {
+export const AdminPage = () => {
   const [books, setBooks] = useState([]);
   const [category, setCategory] = useState();
   const [sort, setSort] = useState();
@@ -44,7 +44,7 @@ export const HomePage = () => {
       const paginationURL = directionURL + `pagination=${pagination}`;
 
       const res = await Axios.get(paginationURL);
-      // console.log(num);
+      console.log(num);
       setBooks(res.data);
     } catch (err) {
       console.log(err);
@@ -142,45 +142,45 @@ export const HomePage = () => {
       </DropdownButton>
 
       <div className="containerHome">
-        {books.map((item, index) => {
-          return (
-            <a href={`/book/${item.id}`} key={index}>
-              <Card className="cardCont">
-                <Card.Img
-                  variant="top"
-                  src="https://cdn.gramedia.com/uploads/items/9786020333519_RICH-DADS---.jpg"
-                />
-                <Card.Body>
-                  <Card.Title>{item.title}</Card.Title>
-                </Card.Body>
-              </Card>
-            </a>
-          );
-        })}
+        <Table striped bordered hover variant="dark">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Title</th>
+              <th>Author</th>
+              <th>Publisher</th>
+              <th>Category</th>
+              <th>Year</th>
+            </tr>
+          </thead>
+          {books.map((item, index) => {
+            return (
+              <tbody>
+                <tr>
+                  <td>{item.id}</td>
+                  <td>{item.title}</td>
+                  <td>{item.author}</td>
+                  <td>{item.publisher}</td>
+                  <td>{item.category}</td>
+                  <td>{item.year}</td>
+                </tr>
+              </tbody>
+            );
+          })}
+        </Table>
       </div>
 
       <div className="containerButton">
         {books.length === 10 ? (
-          <div>
-            <Button
-              variant="primary"
-              onClick={() => {
-                setPagination(pagination + 8);
-                setPage(page + 1);
-              }}
-            >
-              Next
-            </Button>
-            {/* <Button
-              variant="primary"
-              onClick={() => {
-                setPagination(pagination + 8);
-                setPage(page + 1);
-              }}
-            >
-              Last
-            </Button> */}
-          </div>
+          <Button
+            variant="primary"
+            onClick={() => {
+              setPagination(pagination + 8);
+              setPage(page + 1);
+            }}
+          >
+            Next
+          </Button>
         ) : (
           <Button variant="primary" disabled>
             Next
@@ -190,35 +190,19 @@ export const HomePage = () => {
         <h3>Page {page}</h3>
 
         {page !== 1 ? (
-          <div>
-            <Button
-              variant="primary"
-              onClick={() => {
-                setPagination(pagination - 8);
-                setPage(page - 1);
-              }}
-            >
-              Previous
-            </Button>
-            <Button
-              variant="primary"
-              onClick={() => {
-                setPagination(0);
-                setPage(1);
-              }}
-            >
-              First
-            </Button>
-          </div>
+          <Button
+            variant="primary"
+            onClick={() => {
+              setPagination(pagination - 8);
+              setPage(page - 1);
+            }}
+          >
+            Previous
+          </Button>
         ) : (
-          <div>
-            <Button variant="primary" disabled>
-              Previous
-            </Button>
-            <Button variant="primary" disabled>
-              first
-            </Button>
-          </div>
+          <Button variant="primary" disabled>
+            Previous
+          </Button>
         )}
       </div>
     </div>
