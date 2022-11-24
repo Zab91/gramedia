@@ -2,6 +2,9 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import Axios from "axios";
 
+// Redux
+import { useSelector } from "react-redux";
+
 // Bootstrap
 import Card from "react-bootstrap/Card";
 import Dropdown from "react-bootstrap/Dropdown";
@@ -9,9 +12,16 @@ import DropdownButton from "react-bootstrap/DropdownButton";
 import Button from "react-bootstrap/Button";
 
 // CSS
-import "../css/style.css";
+import "../css/home.css";
 
 export const HomePage = () => {
+  const { NIM } = useSelector((state) => state.userSlice.value);
+  // console.log(NIM);
+
+  const url = "http://localhost:2000/book/";
+  const urlT = "http://localhost:2000/transaction/";
+
+  // Books
   const [books, setBooks] = useState([]);
   const [category, setCategory] = useState();
   const [sort, setSort] = useState();
@@ -20,8 +30,23 @@ export const HomePage = () => {
   const [page, setPage] = useState(1);
   const [num, setNum] = useState(0);
 
-  const url = "http://localhost:2000/book/";
+  // Transaction
+  const [bookID, setBookID] = useState();
 
+  const addLoan = async () => {
+    try {
+      const newURL = urlT + `add/${NIM}`;
+      const addURL = newURL + `?book=${bookID}`;
+      // console.log(addURL);
+      console.log(bookID);
+      const res = await Axios.post(addURL);
+      console.log(res);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  // Show Books
   const getBooks = async () => {
     try {
       const newURL = category
@@ -57,17 +82,18 @@ export const HomePage = () => {
   //   }
   // }
 
-  useEffect(() => {
-    getBooks();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [category, sort, direction, pagination, num]);
-
   // const counter = () => {
   //   num++;
   //   if (num > 2) {
   //     num = 0;
   //   }
   // };
+
+  useEffect(() => {
+    getBooks();
+    addLoan();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [category, sort, direction, pagination, num, bookID]);
 
   return (
     <div className="container">
@@ -85,26 +111,26 @@ export const HomePage = () => {
         <Dropdown.Item
           as="button"
           onClick={() => {
-            setCategory("romance");
+            setCategory("Fiction");
             setSort();
             setDirection();
             setPagination(0);
             setPage(1);
           }}
         >
-          Romance
+          Fiction
         </Dropdown.Item>
         <Dropdown.Item
           as="button"
           onClick={() => {
-            setCategory("horror");
+            setCategory("Non-Fiction");
             setSort();
             setDirection();
             setPagination(0);
             setPage(1);
           }}
         >
-          Horror
+          Non-Fiction
         </Dropdown.Item>
       </DropdownButton>
 
@@ -144,17 +170,28 @@ export const HomePage = () => {
       <div className="containerHome">
         {books.map((item, index) => {
           return (
-            <a href={`/book/${item.id}`} key={index}>
+            <div className="cardContainer">
               <Card className="cardCont">
-                <Card.Img
-                  variant="top"
-                  src="https://cdn.gramedia.com/uploads/items/9786020333519_RICH-DADS---.jpg"
-                />
-                <Card.Body>
-                  <Card.Title>{item.title}</Card.Title>
-                </Card.Body>
+                <a href={`/book/${item.id}`} key={index}>
+                  <Card.Img
+                    className="cardImg"
+                    variant="top"
+                    src={item.Images}
+                  />
+                  <Card.Body className="test">
+                    <Card.Title className="cardTitle" content>{item.Title}</Card.Title>
+                  </Card.Body>
+                </a>
+                <Button
+                  variant="primary"
+                  onClick={() => {
+                    setBookID(item.id);
+                  }}
+                >
+                  Add
+                </Button>
               </Card>
-            </a>
+            </div>
           );
         })}
       </div>
@@ -200,7 +237,7 @@ export const HomePage = () => {
             >
               Previous
             </Button>
-            <Button
+            {/* <Button
               variant="primary"
               onClick={() => {
                 setPagination(0);
@@ -208,16 +245,16 @@ export const HomePage = () => {
               }}
             >
               First
-            </Button>
+            </Button> */}
           </div>
         ) : (
           <div>
             <Button variant="primary" disabled>
               Previous
             </Button>
-            <Button variant="primary" disabled>
+            {/* <Button variant="primary" disabled>
               first
-            </Button>
+            </Button> */}
           </div>
         )}
       </div>

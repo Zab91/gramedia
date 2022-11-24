@@ -1,5 +1,5 @@
 "use strict";
-const { Model, BOOLEAN } = require("sequelize");
+const { Model, BOOLEAN, STRING, INTEGER } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -9,24 +9,35 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      User.hasMany(models.Transaction);
     }
   }
   User.init(
     {
       NIM: {
-        type: DataTypes.INTEGER,
+        type: INTEGER,
         primaryKey: true,
         autoIncrement: true,
       },
-      username: { type: DataTypes.STRING, allowNull: false },
-      email: { type: DataTypes.STRING, allowNull: false, unique: true },
-      password: { type: DataTypes.STRING, allowNull: false },
+      username: {
+        type: STRING,
+        allowNull: false,
+      },
+      email: {
+        type: STRING,
+        allowNull: false,
+        unique: true,
+      },
+      password: {
+        type: STRING,
+        allowNull: false,
+      },
       isAdmin: {
-        type: DataTypes.BOOLEAN,
+        type: BOOLEAN,
         defaultValue: false,
       },
       verifyEmail: {
-        type: DataTypes.BOOLEAN,
+        type: BOOLEAN,
         defaultValue: false,
       },
     },

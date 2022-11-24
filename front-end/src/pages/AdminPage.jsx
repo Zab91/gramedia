@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useState } from "react";
 import Axios from "axios";
 
@@ -44,7 +44,7 @@ export const AdminPage = () => {
       const paginationURL = directionURL + `pagination=${pagination}`;
 
       const res = await Axios.get(paginationURL);
-      console.log(num);
+      // console.log(num);
       setBooks(res.data);
     } catch (err) {
       console.log(err);
@@ -155,7 +155,7 @@ export const AdminPage = () => {
           </thead>
           {books.map((item, index) => {
             return (
-              <tbody>
+              <tbody key={index}>
                 <tr>
                   <td>{item.id}</td>
                   <td>{item.title}</td>
