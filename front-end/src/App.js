@@ -11,6 +11,7 @@ import { HomePage } from "./pages/HomePage";
 import { LoginPage } from "./pages/LoginPage";
 import { AdminPage } from "./pages/AdminPage";
 import { DetailPage } from "./pages/DetailPage";
+import { TransactionPage } from "./pages/TransactionPage";
 
 // KeepLogin
 import { useDispatch } from "react-redux";
@@ -21,7 +22,7 @@ import axios from "axios";
 function App() {
   const dispatch = useDispatch();
   const token = localStorage.getItem("token");
-  console.log(token);
+  // console.log(token);
 
   const keepLogin = async () => {
     try {
@@ -30,7 +31,7 @@ function App() {
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log(res.data);
+      // console.log(res.data);
       dispatch(login(res.data));
     } catch (err) {
       console.log(err);
@@ -48,6 +49,7 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />} />
           <Route path="/book/:id" element={<DetailPage />} />
+          <Route path="/transaction" element={<TransactionPage />} />
         </Route>
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />

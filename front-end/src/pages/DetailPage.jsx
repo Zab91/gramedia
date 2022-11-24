@@ -28,8 +28,7 @@ export const DetailPage = () => {
 
   return (
     <div>
-      <div>{detail?.title}</div>
-      {/* <div>test</div> */}
+      <div>{detail?.Title}</div>
     </div>
   );
 };
