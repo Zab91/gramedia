@@ -82,4 +82,31 @@ module.exports = {
       res.status(400).send(err);
     }
   },
+  delete: async (req, res) => {
+    try {
+      await book.destroy({
+        where: {
+          id: req.params.id,
+        },
+        raw: true,
+      });
+      res.status(200).send("Delete Berhasil");
+    } catch (err) {
+      console.log(err);
+      res.status(400).send(err);
+    }
+  },
+  edit: async (req, res) => {
+    try {
+      await book.update(req.body, {
+        where: {
+          id: req.params.id,
+        },
+      });
+      res.status(200).send("update berhasil");
+    } catch (err) {
+      console.log(err);
+      res.status(400).send(err);
+    }
+  },
 };

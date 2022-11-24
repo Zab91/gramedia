@@ -6,11 +6,11 @@
 }
 
 .container-login {
-  background-image: url("https://www.poultryindonesia.com/wp-content/uploads/2018/10/Gramedia-logo.png");
+  /* background-image: url("https://www.poultryindonesia.com/wp-content/uploads/2018/10/Gramedia-logo.png"); */
   background-size: 300px;
   background-repeat: no-repeat;
   margin-top: 1rem;
-  margin: auto;
+  margin: auto, 0;
 }
 
 .mb-3 {
@@ -18,6 +18,13 @@
 }
 
 .button {
+  margin-top: 2rem;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.container-link {
   margin-top: 2rem;
   align-items: center;
   display: flex;
