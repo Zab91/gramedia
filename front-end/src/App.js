@@ -12,17 +12,20 @@ import { LoginPage } from "./pages/LoginPage";
 import { AdminLoginPage } from "./pages/AdminLoginPage";
 import { AdminPage } from "./pages/AdminPage";
 import { DetailPage } from "./pages/DetailPage";
+import { CreateBook } from "./pages/AdminCreateBookPage";
 
 // KeepLogin
 import { useDispatch } from "react-redux";
 import { login } from "./redux/userSlice";
+import { loginAdmin } from "./redux/adminSlice";
 import { useEffect } from "react";
 import axios from "axios";
 
 function App() {
   const dispatch = useDispatch();
   const token = localStorage.getItem("token");
-  console.log(token);
+  const tokenAdmin = localStorage.getItem("tokenAdmin");
+  console.log(tokenAdmin);
 
   const keepLogin = async () => {
     try {
@@ -38,8 +41,30 @@ function App() {
     }
   };
 
+  const keepLoginAdmin = async () => {
+    try {
+      const res = await axios.get(
+        `http://localhost:2000/admin/adminKeepLogin`,
+        {
+          headers: {
+            Authorization: `Bearer ${tokenAdmin}`,
+          },
+        }
+      );
+      console.log(res.data);
+      dispatch(loginAdmin(res.data));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   useEffect(() => {
-    keepLogin();
+    tokenAdmin
+      ? keepLoginAdmin()
+      : token
+      ? keepLogin()
+      : console.log("console log");
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -49,12 +74,13 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />} />
           <Route path="/book/:id" element={<DetailPage />} />
+          <Route path="/verification/:token" element={<VerificationPage />} />
         </Route>
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/verification/:token" element={<VerificationPage />} />
         <Route path="/adminLogin" element={<AdminLoginPage />} />
         <Route path="/admin" element={<AdminPage />} />
+        <Route path="/createBook" element={<CreateBook />} />
       </Routes>
     </BrowserRouter>
   );
