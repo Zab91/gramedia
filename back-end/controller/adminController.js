@@ -23,7 +23,8 @@ module.exports = {
       await bcrypt.compare(password, isAdminExist.password);
       const token = jwt.sign(
         {
-          id: isAdminExist.id,
+          username: isAdminExist.username,
+          email: isAdminExist.email,
         },
         "gramedia"
       );
@@ -59,23 +60,6 @@ module.exports = {
     } catch (error) {
       console.log(error);
       res.status(400).send(error);
-    }
-  },
-  adminKeepLogin: async (req, res) => {
-    try {
-      console.log(req.token);
-      const verify = jwt.verify(req.token, "gramedia");
-      console.log(verify);
-      const result = await admin.findAll({
-        where: {
-          id: verify.id,
-        },
-      });
-
-      res.status(200).send(result[0]);
-    } catch (err) {
-      console.log(err);
-      res.status(400).send(err);
     }
   },
 };

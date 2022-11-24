@@ -117,20 +117,10 @@ module.exports = {
           },
         }
       );
-      res.status(200).send({
-        userNim: verify.NIM,
-        msg: "Verifikasi Sukses",
-      });
+      res.status(200).send("Verifikasi Sukses");
     } catch (error) {
       console.log(error);
       res.status(400).send(error);
-    }
-  },
-  getuserbyNim: async (req, res) => {
-    try {
-    } catch {
-      console.log(err);
-      res.status(400).send(err);
     }
   },
 };

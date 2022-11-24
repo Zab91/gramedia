@@ -97,77 +97,75 @@ export const HomePage = () => {
 
   return (
     <div className="container">
-      <div className="container-sort d-flex flex-row justify-content-space-between ">
-        <DropdownButton id="dropdown-item-button" title="Book Filter">
-          <Dropdown.Item
-            as="button"
-            onClick={() => {
-              setCategory();
-              setSort();
-              setDirection();
-            }}
-          >
-            All
-          </Dropdown.Item>
-          <Dropdown.Item
-            as="button"
-            onClick={() => {
-              setCategory("romance");
-              setSort();
-              setDirection();
-              setPagination(0);
-              setPage(1);
-            }}
-          >
-            Romance
-          </Dropdown.Item>
-          <Dropdown.Item
-            as="button"
-            onClick={() => {
-              setCategory("horror");
-              setSort();
-              setDirection();
-              setPagination(0);
-              setPage(1);
-            }}
-          >
-            Horror
-          </Dropdown.Item>
-        </DropdownButton>
+      <DropdownButton id="dropdown-item-button" title="Filter">
+        <Dropdown.Item
+          as="button"
+          onClick={() => {
+            setCategory();
+            setSort();
+            setDirection();
+          }}
+        >
+          All
+        </Dropdown.Item>
+        <Dropdown.Item
+          as="button"
+          onClick={() => {
+            setCategory("Fiction");
+            setSort();
+            setDirection();
+            setPagination(0);
+            setPage(1);
+          }}
+        >
+          Fiction
+        </Dropdown.Item>
+        <Dropdown.Item
+          as="button"
+          onClick={() => {
+            setCategory("Non-Fiction");
+            setSort();
+            setDirection();
+            setPagination(0);
+            setPage(1);
+          }}
+        >
+          Non-Fiction
+        </Dropdown.Item>
+      </DropdownButton>
 
-        <DropdownButton id="dropdown-item-button" title="Sort By">
-          <Dropdown.Item
-            as="button"
-            onClick={() => {
-              setSort("title");
-              setDirection("ASC");
-              setPagination(0);
-              setPage(1);
-            }}
-          >
-            Title ASC
-          </Dropdown.Item>
-          <Dropdown.Item
-            as="button"
-            onClick={() => {
-              setSort("title");
-              setDirection("DESC");
-              setPagination(0);
-              setPage(1);
-            }}
-          >
-            Title DESC
-          </Dropdown.Item>
-          <Dropdown.Item
-            as="button"
-            onClick={() => {
-              num >= 2 ? setNum(0) : setNum(num + 1);
-            }}
-          >
-            Title
-          </Dropdown.Item>
-        </DropdownButton>
-      </div>
+      <DropdownButton id="dropdown-item-button" title="Sort">
+        <Dropdown.Item
+          as="button"
+          onClick={() => {
+            setSort("title");
+            setDirection("ASC");
+            setPagination(0);
+            setPage(1);
+          }}
+        >
+          Title ASC
+        </Dropdown.Item>
+        <Dropdown.Item
+          as="button"
+          onClick={() => {
+            setSort("title");
+            setDirection("DESC");
+            setPagination(0);
+            setPage(1);
+          }}
+        >
+          Title DESC
+        </Dropdown.Item>
+        <Dropdown.Item
+          as="button"
+          onClick={() => {
+            num >= 2 ? setNum(0) : setNum(num + 1);
+          }}
+        >
+          Title
+        </Dropdown.Item>
+      </DropdownButton>
 
       <div className="containerHome">
         {books.map((item, index) => {
@@ -198,7 +196,7 @@ export const HomePage = () => {
         })}
       </div>
 
-      <div className="containerButton d-flex flex-row justify-content-center align-item-center margin-top-1em ">
+      <div className="containerButton">
         {books.length === 10 ? (
           <div>
             <Button
@@ -226,11 +224,7 @@ export const HomePage = () => {
           </Button>
         )}
 
-        <h5>
-          Page
-          <br></br>
-          <div className="d-flex flex-row justify-content-center">{page}</div>
-        </h5>
+        <h3>Page {page}</h3>
 
         {page !== 1 ? (
           <div>
