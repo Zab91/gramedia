@@ -18,7 +18,7 @@ export const NavbarComp = () => {
     localStorage.removeItem("token");
   };
 
-  return (
+  return username ? (
     <Navbar bg="light" expand="lg">
       <Container>
         <Navbar.Brand href="/">
@@ -39,6 +39,7 @@ export const NavbarComp = () => {
               <NavDropdown.Item href="/register">Register</NavDropdown.Item>
               <NavDropdown.Item href="/Login">Login</NavDropdown.Item>
             </NavDropdown> */}
+
             <InputGroup className="mb-0">
               <Form.Control
                 aria-describedby="basic-addon1"
@@ -67,6 +68,32 @@ export const NavbarComp = () => {
               </Navbar.Collapse>
             </Nav>
           ) : null}
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
+  ) : (
+    <Navbar bg="light" expand="lg">
+      <Container>
+        <Navbar.Brand href="/">
+          <img
+            src="https://www.gramedia.com/assets/gramedia-icon-2.png"
+            width="185px"
+            alt="Gramedia Logo"
+          />
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="me-auto">
+            <InputGroup className="mb-0">
+              <Form.Control
+                aria-describedby="basic-addon1"
+                placeholder="Search"
+              />
+            </InputGroup>
+          </Nav>
+          <Nav className="User">
+            <Navbar.Toggle />
+          </Nav>
         </Navbar.Collapse>
       </Container>
     </Navbar>

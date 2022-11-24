@@ -9,10 +9,12 @@ import { RegisterPage } from "./pages/RegisterPage";
 import { VerificationPage } from "./pages/VerificationPage";
 import { HomePage } from "./pages/HomePage";
 import { LoginPage } from "./pages/LoginPage";
-import { AdminLoginPage } from "./pages/AdminLoginPage";
 import { AdminPage } from "./pages/AdminPage";
+import { AdminLoginPage } from "./pages/AdminLoginPage";
 import { DetailPage } from "./pages/DetailPage";
 import { CreateBook } from "./pages/AdminCreateBookPage";
+import { TransactionPage } from "./pages/TransactionPage";
+
 
 // KeepLogin
 import { useDispatch } from "react-redux";
@@ -25,7 +27,8 @@ function App() {
   const dispatch = useDispatch();
   const token = localStorage.getItem("token");
   const tokenAdmin = localStorage.getItem("tokenAdmin");
-  console.log(tokenAdmin);
+  // console.log(tokenAdmin);
+  // console.log(token);
 
   const keepLogin = async () => {
     try {
@@ -34,7 +37,7 @@ function App() {
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log(res.data);
+      // console.log(res.data);
       dispatch(login(res.data));
     } catch (err) {
       console.log(err);
@@ -75,6 +78,7 @@ function App() {
           <Route index element={<HomePage />} />
           <Route path="/book/:id" element={<DetailPage />} />
           <Route path="/verification/:token" element={<VerificationPage />} />
+          <Route path="/transaction" element={<TransactionPage />} />
         </Route>
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />

@@ -11,9 +11,10 @@ server.use(express.json());
 server.use(cors());
 server.use(bearerToken());
 
-const { user, book, admin } = require("./router");
+const { user, book, transaction } = require("./router");
 server.use("/user", user);
 server.use("/book", book);
+server.use("/transaction", transaction);
 server.use("/admin", admin);
 
 server.listen(PORT, () => {

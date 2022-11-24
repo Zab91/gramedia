@@ -9,27 +9,36 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Book.belongsToMany(models.Transaction, { through: "TransactionDetails" });
     }
   }
   Book.init(
     {
-      title: {
+      Title: {
         type: STRING,
         allowNull: false,
       },
-      author: {
+      Author: {
         type: STRING,
         allowNull: false,
       },
-      publisher: {
+      Genre: {
         type: STRING,
         allowNull: false,
       },
-      category: {
+      Publisher: {
         type: STRING,
         allowNull: false,
       },
-      year: {
+      Images: {
+        type: STRING,
+        allowNull: false,
+      },
+      Abstract: {
+        type: STRING,
+        allowNull: false,
+      },
+      Quota: {
         type: STRING,
         allowNull: false,
       },
