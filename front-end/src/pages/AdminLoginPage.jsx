@@ -6,6 +6,8 @@ import { loginAdmin } from "../redux/adminSlice";
 import Swal from "sweetalert2";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
+import Nav from "react-bootstrap/Nav";
 
 const url = "http://localhost:2000/admin/adminLogin";
 
@@ -43,30 +45,55 @@ export const AdminLoginPage = () => {
     }
   };
 
-  // move ? (
-  //   <Navigate to="#adminDashboard" replace={true} />
-  // ) :
-
-  return (
-    <div className="container-login d-flex flex-column justify-content-center align-items-center">
-      <Form.Group className="headerFront">
-        <div className="header">
-          <h1> Admin Login </h1>
-        </div>
-      </Form.Group>
-      <Form.Group className="mb-3">
-        <Form.Label>username/email</Form.Label>
-        <Form.Control placeholder="username/email" ref={usernameEmail} />
-      </Form.Group>
-      <Form.Group className="mb-3">
-        <Form.Label>Password</Form.Label>
-        <Form.Control placeholder="Password" ref={password} type="password" />
-      </Form.Group>
-      <div className="button">
-        <Button variant="primary" type="submit" size="lg" onClick={onLogin}>
-          Login
-        </Button>
+  return move ? (
+    <Navigate to="/admin" replace={true} />
+  ) : (
+    <>
+      <a href="/">
+        <img
+          src="https://www.poultryindonesia.com/wp-content/uploads/2018/10/Gramedia-logo.png"
+          width="auto"
+          height="65px"
+          alt="logo"
+        />
+      </a>
+      <div className="container-login d-flex flex-column justify-content-center align-items-center">
+        <Form.Group className="headerFront">
+          <div className="header">
+            <h1> Admin Login </h1>
+          </div>
+        </Form.Group>
+        <Card>
+          <Card.Body>
+            <Form.Group className="mb-3">
+              <Form.Label>username/email</Form.Label>
+              <Form.Control placeholder="username/email" ref={usernameEmail} />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Password</Form.Label>
+              <Form.Control
+                placeholder="Password"
+                ref={password}
+                type="password"
+              />
+            </Form.Group>
+            <div className="button">
+              <Button
+                variant="primary"
+                type="submit"
+                size="lg"
+                onClick={onLogin}
+              >
+                Login
+              </Button>
+            </div>
+            <br></br>
+            <div className="container-home d-flex flex-row justify-content-center">
+              <Nav.Link href="/"> Back To Homepage </Nav.Link>
+            </div>
+          </Card.Body>
+        </Card>
       </div>
-    </div>
+    </>
   );
 };
