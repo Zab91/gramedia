@@ -10,6 +10,7 @@ import { VerificationPage } from "./pages/VerificationPage";
 import { HomePage } from "./pages/HomePage";
 import { LoginPage } from "./pages/LoginPage";
 import { AdminPage } from "./pages/AdminPage";
+import { AdminLoginPage } from "./pages/AdminLoginPage";
 import { DetailPage } from "./pages/DetailPage";
 import { TransactionPage } from "./pages/TransactionPage";
 
@@ -54,6 +55,7 @@ function App() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/verification/:token" element={<VerificationPage />} />
+        <Route path="/adminLogin" element={<AdminLoginPage />} />
         <Route path="/admin" element={<AdminPage />} />
       </Routes>
     </BrowserRouter>

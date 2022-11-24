@@ -15,6 +15,7 @@ const { user, book, transaction } = require("./router");
 server.use("/user", user);
 server.use("/book", book);
 server.use("/transaction", transaction);
+server.use("/admin", admin);
 
 server.listen(PORT, () => {
   // db.sequelize.sync({ alter: true });

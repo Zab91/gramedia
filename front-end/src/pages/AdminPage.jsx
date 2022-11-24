@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import Axios from "axios";
 
 // Bootstrap
@@ -8,6 +9,7 @@ import Button from "react-bootstrap/Button";
 import Table from "react-bootstrap/Table";
 
 // CSS
+import "../css/style.css";
 
 export const AdminPage = () => {
   const [books, setBooks] = useState([]);

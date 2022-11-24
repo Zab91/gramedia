@@ -13,7 +13,7 @@ module.exports = {
       const { username, email, password, confirmPassword } = req.body;
       if (password !== confirmPassword)
         throw "Password atau Confirm Password Salah";
-      if (password.length <= 6) throw "Password Anda kurang dari 6 karakter!";
+      if (password.length < 6) throw "Password Anda kurang dari 6 karakter!";
 
       const salt = await bcrypt.genSalt(10);
       const hassPash = await bcrypt.hash(password, salt);
@@ -29,7 +29,7 @@ module.exports = {
       });
       console.log(token);
       const tempEmail = fs.readFileSync("./email/email.html", "utf-8");
-      const tempCompile = await handlebars.compile(tempEmail);
+      const tempCompile = handlebars.compile(tempEmail);
       const tempResult = tempCompile({
         username,
         link: `http://localhost:3000/verification/${token}`,
